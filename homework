@@ -1,0 +1,89 @@
+class Nikola:
+    __slots__ = ('name', 'age')  #
+
+    def __init__(self, name: str, age: int):
+        if name != "Николай":
+            self.name = f"Я не {name}, а Николай"
+        else:
+            self.name = name
+        self.age = age
+
+
+n1 = Nikola("Максим", 30)
+print(n1.name)
+print(n1.age)
+
+n2 = Nikola("Николай", 25)
+print(n2.name)
+print(n2.age)
+
+
+
+class KgToPounds:
+    def __init__(self, kg):
+        self.kg = kg
+
+    def to_pounds(self):
+        return self.kg * 2.205
+
+    @property
+    def kg(self):
+        return self._kg
+
+    @kg.setter
+    def kg(self, new_kg):
+        if isinstance(new_kg, (int, float)):
+            self._kg = new_kg
+        else:
+            raise ValueError('Килограммы задаются только числами')
+
+
+weight = KgToPounds(10)
+print(weight.kg)
+print(weight.to_pounds())
+
+weight.kg = 20
+print(weight.kg)
+print(weight.to_pounds())
+
+class Phone:
+    def __init__(self, number=None, model=None, weight=None):
+        self.number = number
+        self.model = model
+        self.weight = weight
+
+    def receive_call(self, name, caller_number=None):
+        if caller_number:
+            print(f"Звонит {name}, номер: {caller_number}")
+        else:
+            print(f"Звонит {name}")
+
+    def get_number(self):
+        return self.number
+
+    def send_message(self, phones):
+        phone_list = phones.split(';')
+        for phone in phone_list:
+            print(f"Отправлено сообщение на номер: {phone}")
+
+    def display(self):
+        print(f"Номер: {self.number}, Модель: {self.model}, Вес: {self.weight} кг")
+
+
+
+phone1 = Phone("123456789", "ModelX", 0.5)
+phone2 = Phone("987654321", "ModelY")
+phone3 = Phone()
+
+
+phone1.display()
+phone2.display()
+phone3.display()
+
+
+phone1.receive_call("Алексей")
+phone2.receive_call("Иван", "567890123")
+print(f"Номер телефона phone1: {phone1.get_number()}")
+
+
+phone1.send_message("123456789;987654321;555555555")
